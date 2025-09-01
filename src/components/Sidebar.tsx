@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */ 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 'use client';
 
-import { Clover, Film, Home, Menu, Search, Sparkles, Star, Tv } from 'lucide-react';
+import { Clover, Film, Home, Menu, Search, Star, Tv } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import {
@@ -140,11 +140,6 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
       label: '综艺',
       href: '/douban?type=show',
     },
-    {
-      icon: Sparkles, // 动漫类别的图标
-      label: '动漫',
-      href: '/douban?type=anime',
-    },
   ]);
 
   useEffect(() => {
@@ -256,7 +251,7 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
                       decodedActive.includes(`type=${typeMatch}`));
                   const Icon = item.icon;
                   return (
-                    <链接
+                    <Link
                       key={item.label}
                       href={item.href}
                       onClick={() => setActive(item.href)}
@@ -273,7 +268,7 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
                           {item.label}
                         </span>
                       )}
-                    </链接>
+                    </Link>
                   );
                 })}
               </div>
