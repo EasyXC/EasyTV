@@ -2,7 +2,7 @@
 
 'use client';
 
-import { Clover, Film, Home, Menu, Search, Star, Tv } from 'lucide-react';
+import { Clover, Film, Home, Menu, Search, Sparkles, Star, Tv } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import {
@@ -104,7 +104,7 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
       const fullPath = getCurrentFullPath();
       setActive(fullPath);
     }
-  }， [activePath, pathname, searchParams]);
+  }, [activePath, pathname, searchParams]);
 
   const handleToggle = useCallback(() => {
     const newState = !isCollapsed;
@@ -114,37 +114,37 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
       window.__sidebarCollapsed = newState;
     }
     onToggle?.(newState);
-  }， [isCollapsed, onToggle]);
+  }, [isCollapsed, onToggle]);
 
   const handleSearchClick = useCallback(() => {
     router.push('/search');
-  }， [router]);
+  }, [router]);
 
   const contextValue = {
-    isCollapsed，
+    isCollapsed,
   };
 
-  const [menuItems， setMenuItems] = useState([
+  const [menuItems, setMenuItems] = useState([
     {
       icon: Film,
       label: '电影',
-      href: '/douban?type=movie'，
-    }，
+      href: '/douban?type=movie',
+    },
     {
       icon: Tv,
-      label: '剧集'，
-      href: '/douban?type=tv'，
-    }，
+      label: '剧集',
+      href: '/douban?type=tv',
+    },
     {
       icon: Clover,
-      label: '综艺'，
-      href: '/douban?type=show'，
-    }，
+      label: '综艺',
+      href: '/douban?type=show',
+    },
     {
-    icon: Star,
-    label: '动漫',
-    href: '/douban?type=anime',
-  },
+      icon: Sparkles, // 动漫类别的图标
+      label: '动漫',
+      href: '/douban?type=anime',
+    },
   ]);
 
   useEffect(() => {
@@ -155,11 +155,11 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
         {
           icon: Star,
           label: '自定义',
-          href: '/douban?type=custom'，
-        }，
+          href: '/douban?type=custom',
+        },
       ]);
     }
-  }， []);
+  }, []);
 
   return (
     <SidebarContext.Provider value={contextValue}>
@@ -193,7 +193,7 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
                   isCollapsed ? 'left-1/2 -translate-x-1/2' : 'right-2'
                 }`}
               >
-                <菜单 className='h-4 w-4' />
+                <Menu className='h-4 w-4' />
               </button>
             </div>
 
@@ -290,4 +290,4 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
   );
 };
 
-export default Sidebar; 
+export default Sidebar;
