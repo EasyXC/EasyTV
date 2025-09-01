@@ -140,20 +140,21 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
       label: '综艺',
       href: '/douban?type=show',
     },
+    {
+      icon: Star,
+      label: '自定义',
+      href: '/douban?type=custom',
+    },
   ]);
 
   useEffect(() => {
     const runtimeConfig = (window as any).RUNTIME_CONFIG;
-    if (runtimeConfig?.CUSTOM_CATEGORIES?.length > 0) {
-      setMenuItems((prevItems) => [
-        ...prevItems,
-        {
-          icon: Star,
-          label: '自定义',
-          href: '/douban?type=custom',
-        },
-      ]);
-    }
+    setMenuItems((prevItems) => {
+      // 检查是否有自定义分类
+      const hasCustomCategories = runtimeConfig?.CUSTOM_CATEGORIES?.length > 0;
+      // 过滤掉自定义菜单项，如果不存在自定义分类的话
+      return prevItems.filter(item => item.label !== '自定义' || hasCustomCategories);
+    });
   }, []);
 
   return (
