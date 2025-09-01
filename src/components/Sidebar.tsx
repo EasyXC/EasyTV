@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-explicit-any */ 
 
 'use client';
 
@@ -104,7 +104,7 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
       const fullPath = getCurrentFullPath();
       setActive(fullPath);
     }
-  }, [activePath, pathname, searchParams]);
+  }， [activePath, pathname, searchParams]);
 
   const handleToggle = useCallback(() => {
     const newState = !isCollapsed;
@@ -114,48 +114,52 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
       window.__sidebarCollapsed = newState;
     }
     onToggle?.(newState);
-  }, [isCollapsed, onToggle]);
+  }， [isCollapsed, onToggle]);
 
   const handleSearchClick = useCallback(() => {
     router.push('/search');
-  }, [router]);
+  }， [router]);
 
   const contextValue = {
-    isCollapsed,
+    isCollapsed，
   };
 
-  const [menuItems, setMenuItems] = useState([
+  const [menuItems， setMenuItems] = useState([
     {
       icon: Film,
       label: '电影',
-      href: '/douban?type=movie',
-    },
+      href: '/douban?type=movie'，
+    }，
     {
       icon: Tv,
-      label: '剧集',
-      href: '/douban?type=tv',
-    },
+      label: '剧集'，
+      href: '/douban?type=tv'，
+    }，
     {
       icon: Clover,
-      label: '综艺',
-      href: '/douban?type=show',
-    },
+      label: '综艺'，
+      href: '/douban?type=show'，
+    }，
     {
-      icon: Star,
-      label: '自定义',
-      href: '/douban?type=custom',
-    },
+    icon: Star,
+    label: '动漫',
+    href: '/douban?type=anime',
+  },
   ]);
 
   useEffect(() => {
     const runtimeConfig = (window as any).RUNTIME_CONFIG;
-    setMenuItems((prevItems) => {
-      // 检查是否有自定义分类
-      const hasCustomCategories = runtimeConfig?.CUSTOM_CATEGORIES?.length > 0;
-      // 过滤掉自定义菜单项，如果不存在自定义分类的话
-      return prevItems.filter(item => item.label !== '自定义' || hasCustomCategories);
-    });
-  }, []);
+    if (runtimeConfig?.CUSTOM_CATEGORIES?.length > 0) {
+      setMenuItems((prevItems) => [
+        ...prevItems,
+        {
+          icon: Star,
+          label: '自定义',
+          href: '/douban?type=custom'，
+        }，
+      ]);
+    }
+  }， []);
 
   return (
     <SidebarContext.Provider value={contextValue}>
@@ -189,7 +193,7 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
                   isCollapsed ? 'left-1/2 -translate-x-1/2' : 'right-2'
                 }`}
               >
-                <Menu className='h-4 w-4' />
+                <菜单 className='h-4 w-4' />
               </button>
             </div>
 
@@ -252,7 +256,7 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
                       decodedActive.includes(`type=${typeMatch}`));
                   const Icon = item.icon;
                   return (
-                    <Link
+                    <链接
                       key={item.label}
                       href={item.href}
                       onClick={() => setActive(item.href)}
@@ -269,7 +273,7 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
                           {item.label}
                         </span>
                       )}
-                    </Link>
+                    </链接>
                   );
                 })}
               </div>
@@ -286,4 +290,4 @@ const Sidebar = ({ onToggle, activePath = '/' }: SidebarProps) => {
   );
 };
 
-export default Sidebar;
+export default Sidebar; 
