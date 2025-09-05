@@ -2,7 +2,7 @@
 
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
-import Script from 'next/script'; // 👈 引入 Next.js 的 Script 组件
+import Script from 'next/script';
 
 import './globals.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -101,7 +101,7 @@ export default async function RootLayout({
         <script
           id="runtime-config-script"
           dangerouslySetInnerHTML={{
-            __html: `window.RUNTIME_CONFIG = ${JSON.stringify(runtimeConfig)};`，
+            __html: `window.RUNTIME_CONFIG = ${JSON.stringify(runtimeConfig)};`,
           }}
         />
       </head>
@@ -121,7 +121,7 @@ export default async function RootLayout({
                 var s = document.getElementsByTagName("script")[0]; 
                 s.parentNode.insertBefore(hm, s);
               })();
-            `，
+            `,
           }}
         />
         <ThemeProvider
