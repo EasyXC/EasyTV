@@ -2,6 +2,7 @@
 
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
+import Script from 'next/script'; // 👈 引入 Next.js 的 Script 组件
 
 import './globals.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -98,23 +99,31 @@ export default async function RootLayout({
         {/* 将配置序列化后直接写入脚本，浏览器端可通过 window.RUNTIME_CONFIG 获取 */}
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script
+          id="runtime-config-script"
           dangerouslySetInnerHTML={{
             __html: `window.RUNTIME_CONFIG = ${JSON.stringify(runtimeConfig)};`,
           }}
         />
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?81188f0d2294758539fe3b3d084badce";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
       </head>
       <body
         className={`${inter.className} min-h-screen bg-white text-gray-900 dark:bg-black dark:text-gray-200`}
       >
+        {/* 使用 Next.js 的 Script 组件引入百度统计 */}
+        <Script
+          id="baidu-analytics" // 给脚本一个唯一的ID
+          strategy="afterInteractive" // 在页面交互后加载脚本，不阻塞页面渲染
+          dangerouslySetInnerHTML={{
+            __html: `
+              var _hmt = _hmt || [];
+              (function() {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?81188f0d2294758539fe3b3d084badce";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+              })();
+            `,
+          }}
+        />
         <ThemeProvider
           attribute='class'
           defaultTheme='system'
