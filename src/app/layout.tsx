@@ -2,7 +2,7 @@
 
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
-import Script from 'next/script';
+import Script from 'next/script'; // 👈 确保引入了 Script 组件
 
 import './globals.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -104,26 +104,27 @@ export default async function RootLayout({
             __html: `window.RUNTIME_CONFIG = ${JSON.stringify(runtimeConfig)};`,
           }}
         />
-      </head>
-      <body
-        className={`${inter.className} min-h-screen bg-white text-gray-900 dark:bg-black dark:text-gray-200`}
-      >
-        {/* 使用 Next.js 的 Script 组件引入百度统计 */}
+        
+        {/* 👇 在这里使用 next/script 组件添加百度统计代码 👇 */}
         <Script
-          id="baidu-analytics" // 给脚本一个唯一的ID
-          strategy="afterInteractive" // 在页面交互后加载脚本，不阻塞页面渲染
+          id="baidu-analytics"
+          strategy="beforeInteractive" // 确保脚本在页面交互前加载
           dangerouslySetInnerHTML={{
             __html: `
               var _hmt = _hmt || [];
               (function() {
                 var hm = document.createElement("script");
                 hm.src = "https://hm.baidu.com/hm.js?f47827bf19fdf9683e6a316263c2effa";
-                var s = document.getElementsByTagName("script")[0]; 
+                var s = document.getElementsByTagName("script")[0];
                 s.parentNode.insertBefore(hm, s);
               })();
-            `,
+            `，
           }}
         />
+      </head>
+      <body
+        className={`${inter.className} min-h-screen bg-white text-gray-900 dark:bg-black dark:text-gray-200`}
+      >
         <ThemeProvider
           attribute='class'
           defaultTheme='system'
