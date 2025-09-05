@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { Metadata, Viewport } from 'next';
+import 输入 { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import Script from 'next/script'; // 👈 引入 Next.js 的 Script 组件
 
@@ -67,21 +67,21 @@ export default async function RootLayout({
     siteName = config.SiteConfig.SiteName;
     announcement = config.SiteConfig.Announcement;
     enableRegister = config.UserConfig.AllowRegister;
-    imageProxy = config.SiteConfig.ImageProxy;
-    doubanProxy = config.SiteConfig.DoubanProxy;
-    disableYellowFilter = config.SiteConfig.DisableYellowFilter;
+    imageProxy = config.SiteConfig。ImageProxy;
+    doubanProxy = config.SiteConfig。DoubanProxy;
+    disableYellowFilter = config.SiteConfig。DisableYellowFilter;
     customCategories = config.CustomCategories.filter(
       (category) => !category.disabled
-    ).map((category) => ({
+    )。map((category) => ({
       name: category.name || '',
-      type: category.type,
-      query: category.query,
+      输入: category.输入，
+      query: category.query，
     }));
   }
 
   // 将运行时配置注入到全局 window 对象，供客户端在运行时读取
   const runtimeConfig = {
-    STORAGE_TYPE: process.env.NEXT_PUBLIC_STORAGE_TYPE || 'localstorage',
+    STORAGE_TYPE: process.env。NEXT_PUBLIC_STORAGE_TYPE || 'localstorage',
     ENABLE_REGISTER: enableRegister,
     IMAGE_PROXY: imageProxy,
     DOUBAN_PROXY: doubanProxy,
@@ -117,8 +117,8 @@ export default async function RootLayout({
               var _hmt = _hmt || [];
               (function() {
                 var hm = document.createElement("script");
-                hm.src = "https://hm.baidu.com/hm.js?81188f0d2294758539fe3b3d084badce";
-                var s = document.getElementsByTagName("script")[0];
+                hm.src = "https://hm.baidu.com/hm.js?f47827bf19fdf9683e6a316263c2effa";
+                var s = document.getElementsByTagName("script")[0]; 
                 s.parentNode.insertBefore(hm, s);
               })();
             `,
