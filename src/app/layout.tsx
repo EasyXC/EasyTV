@@ -2,7 +2,7 @@
 
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
-import Script from 'next/script'; // 👈 确保引入了 Script 组件
+import Script from 'next/script'; // 引入 Script 组件
 
 import './globals.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -16,7 +16,7 @@ import { ThemeProvider } from '../components/ThemeProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
-// 动态生成 metadata，支持配置更新后的标题变化
+// 动态生成 metadata
 export async function generateMetadata(): Promise<Metadata> {
   let siteName = process.env.SITE_NAME || 'MoonTV';
   if (
@@ -105,7 +105,7 @@ export default async function RootLayout({
           }}
         />
         
-        {/* 👇 在这里使用 next/script 组件添加百度统计代码 👇 */}
+        {/* 在这里使用 next/script 组件添加百度统计代码 */}
         <Script
           id="baidu-analytics"
           strategy="beforeInteractive" // 确保脚本在页面交互前加载
@@ -118,7 +118,7 @@ export default async function RootLayout({
                 var s = document.getElementsByTagName("script")[0];
                 s.parentNode.insertBefore(hm, s);
               })();
-            `，
+            `,
           }}
         />
       </head>
